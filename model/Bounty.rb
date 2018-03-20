@@ -3,9 +3,7 @@ require("pg")
 
 class Bounty
 
-  attr_accessor :name, :species, :bounty_value, :danger_level
-  
-  attr_reader :id
+  attr_accessor :name, :species, :bounty_value, :danger_level, :id
 
   def initialize ( options )
     @name = options['name']
@@ -103,10 +101,6 @@ class Bounty
 
     db.close()
   end
-
-
-
-
 
 
 

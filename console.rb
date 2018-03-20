@@ -30,42 +30,18 @@ bounty3.save()
 bounty4.save()
 bounty5.save()
 
-# p Bounty.all()
-# puts ""
-# Bounty.delete_all()
-#
-# puts Bounty.all()
-
 all_bounties = Bounty.all()
+
+first_object = all_bounties.first
+first_object.name = "Blagharst the Awful"
+first_object.update()
+
+# Why is p all_bounties and Bounty.all different?
 # p all_bounties
 # puts ""
-
-first_bounty_object = all_bounties.first()
-# p first_bounty_object
+# p Bounty.all()
 # puts ""
 
-
-first_bounty_object.name = "Blagharst the Awful"
-first_bounty_object.update()
-
+first_object.delete()
 p Bounty.all()
 puts ""
-
-first_bounty_object.delete()
-
-p Bounty.all()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#
