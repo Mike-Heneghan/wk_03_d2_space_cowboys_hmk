@@ -119,9 +119,9 @@ class Bounty
 
     db.close()
 
-    found = bounties.map { |bountie_hash| Bounty.new(bountie_hash) }
+    found = bounties.find{ |i| i}
 
-    return found[0]
+    return found
 
   end
 
