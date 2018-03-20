@@ -125,6 +125,28 @@ class Bounty
 
   end
 
+  def Bounty.find_by_id(id)
+    db = PG.connect ( { dbname: 'bounty_hunter', host: 'localhost'} )
+
+    sql = "
+    SELECT *
+    FROM bounties
+    WHERE id = $1
+    ;
+    "
+
+    value = [id]
+
+    db.prepare("find_by_id", sql)
+    bounties = db.exec_prepared("find_by_id", value)
+
+    db.close()
+
+    found = bounties.find{ |i| i}
+
+    return found
+
+  end
 
 
 

@@ -22,13 +22,13 @@ bounty_hash5 = { 'name' => 'Roy Batty', 'species' => 'NEXUS-6 N6MAA10816', 'boun
 
 bounty5 = Bounty.new( bounty_hash5 )
 
-Bounty.delete_all
-
-bounty1.save()
-bounty2.save()
-bounty3.save()
-bounty4.save()
-bounty5.save()
+# Bounty.delete_all
+#
+# bounty1.save()
+# bounty2.save()
+# bounty3.save()
+# bounty4.save()
+# bounty5.save()
 
 all_bounties = Bounty.all()
 
@@ -49,4 +49,8 @@ puts ""
 
 target = Bounty.find_by_name('Roy Batty')
 p target
+puts ""
+
+target2 = Bounty.find_by_id(3)
+p target2
 puts ""
