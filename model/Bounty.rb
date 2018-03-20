@@ -102,6 +102,28 @@ class Bounty
     db.close()
   end
 
+  def Bounty.find_by_name(name)
+    db = PG.connect ( { dbname: 'bounty_hunter', host: 'localhost'} )
+
+    sql = "
+    SELECT *
+    FROM bounties
+    WHERE name = $1
+    ;
+    "
+
+    value = [name]
+
+    db.prepare("find_by_name", sql)
+    bounties = db.exec_prepared("find_by_name", value)
+
+    db.close()
+
+    found = bounties.map { |bountie_hash| Bounty.new(bountie_hash) }
+
+    return found[0]
+
+  end
 
 
 

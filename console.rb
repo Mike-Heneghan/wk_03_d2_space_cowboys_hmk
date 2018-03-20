@@ -46,3 +46,7 @@ first_object.delete()
 
 p Bounty.all()
 puts ""
+
+target = Bounty.find_by_name('Roy Batty')
+p target
+puts ""
