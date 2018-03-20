@@ -10,6 +10,7 @@ class Bounty
     @species = options['species']
     @bounty_value = options['bounty_value'].to_i
     @danger_level = options['danger_level']
+    @id = options['id'].to_i if options['id']
 
   end
 
@@ -72,9 +73,7 @@ class Bounty
     db = PG.connect ( { dbname: 'bounty_hunter', host: 'localhost'})
 
     sql = "
-    UPDATE bounties
-    SET (name, species, bounty_value, danger_level)
-    = ($1, $2, $3, $4)
+    UPDATE bounties SET (name, species, bounty_value, danger_level) = ($1, $2, $3, $4)
     WHERE id = $5
     ;
     "
@@ -94,6 +93,7 @@ class Bounty
             WHERE id = $1
       ;
     "
+
     values = [@id]
 
     db.prepare("delete", sql)

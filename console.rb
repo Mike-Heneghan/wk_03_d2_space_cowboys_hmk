@@ -43,5 +43,6 @@ first_object.update()
 # puts ""
 
 first_object.delete()
+
 p Bounty.all()
 puts ""
