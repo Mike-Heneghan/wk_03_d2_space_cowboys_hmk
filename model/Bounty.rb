@@ -4,13 +4,14 @@ require("pg")
 class Bounty
 
   attr_accessor :name, :species, :bounty_value, :danger_level
+  
   attr_reader :id
 
-  def initialize ( bounties )
-    @name = bounties['name']
-    @species = bounties['species']
-    @bounty_value = bounties['bounty_value'].to_i
-    @danger_level = bounties['danger_level']
+  def initialize ( options )
+    @name = options['name']
+    @species = options['species']
+    @bounty_value = options['bounty_value'].to_i
+    @danger_level = options['danger_level']
 
   end
 
@@ -43,11 +44,11 @@ class Bounty
     "
 
     db.prepare("all", sql)
-    prey = db.exec_prepared("all")
+    bounties = db.exec_prepared("all")
 
     db.close()
 
-    bounty_objects = prey.map { |prey_hash| Bounty.new(prey_hash) }
+    bounty_objects = bounties.map { |bountie_hash| Bounty.new(bountie_hash) }
 
     return bounty_objects
 
@@ -74,24 +75,34 @@ class Bounty
 
     sql = "
     UPDATE bounties
-    (name, species, bounty_value, danger_level)
-    VALUES
-    ($1, $2, $3, $4)
-    WHERE (id = $5)
+    SET (name, species, bounty_value, danger_level)
+    = ($1, $2, $3, $4)
+    WHERE id = $5
     ;
     "
 
-    values = [@name, @species, @bounty_value, @danger_level]
+    values = [@name, @species, @bounty_value, @danger_level, @id]
 
-    db.prepare("update_field", sql)
-    db.exec_prepared("update_field", values)
+    db.prepare("update", sql)
+    db.exec_prepared("update", values)
 
     db.close()
-
-
   end
 
+  def delete()
+    db = PG.connect( { dbname: "bounty_hunter", host: "localhost" })
 
+    sql = " DELETE FROM bounties
+            WHERE id = $1
+      ;
+    "
+    values = [@id]
+
+    db.prepare("delete", sql)
+    db.exec_prepared("delete", values)
+
+    db.close()
+  end
 
 
 

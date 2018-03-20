@@ -22,29 +22,38 @@ bounty_hash5 = { 'name' => 'Roy Batty', 'species' => 'NEXUS-6 N6MAA10816', 'boun
 
 bounty5 = Bounty.new( bounty_hash5 )
 
-# bounty1.save()
-# bounty2.save()
-# bounty3.save()
-# bounty4.save()
-# bounty5.save()
+Bounty.delete_all
 
-p Bounty.all()
-puts ""
+bounty1.save()
+bounty2.save()
+bounty3.save()
+bounty4.save()
+bounty5.save()
+
+# p Bounty.all()
+# puts ""
 # Bounty.delete_all()
 #
 # puts Bounty.all()
 
 all_bounties = Bounty.all()
+# p all_bounties
+# puts ""
 
-first_bounty_object = all_bounties.first
+first_bounty_object = all_bounties.first()
+# p first_bounty_object
+# puts ""
+
 
 first_bounty_object.name = "Blagharst the Awful"
-first_bounty_object.danger_level = "low"
-# first_bounty_object.update()
+first_bounty_object.update()
 
 p Bounty.all()
+puts ""
 
+first_bounty_object.delete()
 
+p Bounty.all()
 
 
 
